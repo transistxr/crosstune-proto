@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package crosstune.v1;
+
+option go_package = "crosstune/gen/crosstune/v1;crosstunev1";
+
+enum EntityType {
+  ENTITY_TYPE_UNSPECIFIED = 0;
+  ENTITY_TYPE_SONG = 1;
+  ENTITY_TYPE_ALBUM = 2;
+  ENTITY_TYPE_ARTIST = 3;
+}
+
+enum MusicService {
+  MUSIC_SERVICE_UNSPECIFIED = 0;
+  MUSIC_SERVICE_SPOTIFY = 1;
+  MUSIC_SERVICE_APPLE_MUSIC = 2;
+  MUSIC_SERVICE_YOUTUBE_MUSIC = 3;
+}
+
+enum ServiceStatus {
+  SERVICE_STATUS_UNSPECIFIED = 0;
+  SERVICE_STATUS_OK = 1;
+  SERVICE_STATUS_UNAVAILABLE = 2;
+  SERVICE_STATUS_ERROR = 3;
+}
+
+message MapEntityRequest {
+  EntityType entity_type = 1;
+  MusicService source_service = 2;
+  MusicService target_service = 3;
+  string source_entity_id = 4;
+  string source_link = 5;
+}
+
+message MapEntityResponse {
+  string target_entity_id = 1;
+  string target_entity_name = 2;
+  string target_link = 3;
+
+  string artist_name = 4;
+  string album_name = 5;
+
+  bool found = 6;
+
+  map<string, ServiceStatus> service_statuses = 7;
+}
+
+service CrossTuneService {
+  rpc MapEntity(MapEntityRequest) returns (MapEntityResponse);
+}
