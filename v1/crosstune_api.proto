@@ -44,6 +44,9 @@ message MapEntityResponse {
   bool found = 6;
 
   map<string, ServiceStatus> service_statuses = 7;
+
+  string source_entity_id = 8;
+  string source_entity_name = 9;
 }
 
 service CrossTuneService {
