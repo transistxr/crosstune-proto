@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package crosstune.v1;
 
-option go_package = "github.com/transistxr/crosstune-server/gen/crosstune/v1;crosstunev1";
+option go_package = "crosstune/gen/crosstune/v1;crosstunev1";
 
 enum EntityType {
   ENTITY_TYPE_UNSPECIFIED = 0;
@@ -43,7 +43,7 @@ message MapEntityResponse {
 
   bool found = 6;
 
-  map<MusicService, ServiceStatus> service_statuses = 7;
+  map<string, ServiceStatus> service_statuses = 7;
 
   string source_entity_id = 8;
   string source_entity_name = 9;
